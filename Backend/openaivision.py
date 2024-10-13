@@ -1,11 +1,12 @@
 from openai import OpenAI
 from bs4 import BeautifulSoup
 import requests
+import os
 
 class OpenAIVision:
     # Intialize the OpenAI API with the API key
     def __init__(self):
-        self.openai = OpenAI(api_key="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")
+        self.openai = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
 
     # Gets details of the part from the two images taken by the user
     def get_part_details(self, image_url):
