@@ -6,7 +6,7 @@ import os
 class OpenAIVision:
     # Intialize the OpenAI API with the API key
     def __init__(self):
-        self.openai = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
+        self.openai = OpenAI()
 
     # Gets details of the part from the two images taken by the user
     def get_part_details(self, image_url):
