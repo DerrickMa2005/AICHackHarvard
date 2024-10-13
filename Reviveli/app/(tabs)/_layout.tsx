@@ -7,12 +7,12 @@ import Ionicons from '@expo/vector-icons/Ionicons';
         <Tabs   screenOptions={{
             tabBarActiveTintColor: '#ffd33d',
             headerStyle: {
-              backgroundColor: '#25292e',
+              backgroundColor: '#06402B',
             },
             headerShadowVisible: false,
             headerTintColor: '#fff',
             tabBarStyle: {
-            backgroundColor: '#25292e',
+            backgroundColor: '#06402B',
             },
           }}>
             <Tabs.Screen name='index' options={{ title: 'Home', 

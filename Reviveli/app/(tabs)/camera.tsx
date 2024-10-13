@@ -1,6 +1,7 @@
 import { Text, View, StyleSheet, Pressable, Image} from 'react-native';
 import React from 'react';
 import { Camera, CameraType, useCameraPermissions, CameraView } from "expo-camera";
+import axios from 'axios';
 
 const CameraScreen = () => {
     const [permission, setPermission] = useCameraPermissions();
@@ -8,7 +9,8 @@ const CameraScreen = () => {
     const [facing, setFacing] = React.useState<CameraType>('back');
     const cameraRef = React.useRef<Camera>(null);
     const [photo, setPhoto] = React.useState<string | null>(null);
-    const [isCameraReady, setIsCameraReady] = React.useState(false)
+    const [isCameraReady, setIsCameraReady] = React.useState(false);
+    const [output, setOutput] = React.useState(null);
     React.useEffect(() => {
         if (!permission) {
           console.log('Requesting camera permissions...');
@@ -39,9 +41,10 @@ const CameraScreen = () => {
         return;
       }
       try {
-        const data = await cameraRef.current.takePictureAsync( {base64: true} );
-        console.log(data.uri);
-        setPhoto(data.uri);
+        const data = await cameraRef.current.takePictureAsync();
+        setPhoto(data.base64);
+        const response = await axios.post('http://localhost:5000/api/input', { photo });
+        setOutput(response.data);
       } catch (error) {
         console.error('Failed to take picture:', error);
       }
@@ -67,7 +70,7 @@ const CameraScreen = () => {
           </CameraView>
         ) : (
           <View style={styles.preview}>
-            <Image source={{ uri: photo }} style={styles.image} />
+            <Text style={styles.text}> {JSON.stringify(output)} </Text>
             <Pressable style={styles.button} onPress={() => setPhoto(null)}>
               <Text style={styles.text}>Retake Picture</Text>
             </Pressable>

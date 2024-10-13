@@ -5,8 +5,9 @@ import { Link } from 'expo-router';
 
 export default function Index() {
   return (
-    <View style={styles.container}>
+    <View>
       <Text style={styles.text}></Text>
+      <Text style={styles.container}>Welcome to Reviveli!</Text>
     </View>
   );
 }
@@ -23,9 +24,5 @@ const styles = StyleSheet.create({
   },
   text: {
     color: '#000',
-  },
-  navBar: {
-    backgroundColor: '#2E6F40',
-    padding: 15,
   },
 });
