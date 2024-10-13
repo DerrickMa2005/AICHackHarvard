@@ -9,10 +9,12 @@ const CameraScreen = () => {
     const cameraRef = React.useRef<Camera>(null);
     const [photo, setPhoto] = React.useState<string | null>(null);
     const [isCameraReady, setIsCameraReady] = React.useState(false)
-
     React.useEffect(() => {
         if (!permission) {
+          console.log('Requesting camera permissions...');
           setPermission();
+        } else {
+          console.log('Camera permissions:', permission);
         }
       }, [permission]);
     if (!permission) {
@@ -52,6 +54,7 @@ const CameraScreen = () => {
             console.log('Camera is ready!');
             setIsCameraReady(true); // Set readiness state
           }}
+          ref={(ref) => (cameraRef.current = ref)}
           onMountError={(error) => console.error('Camera mount error:', error)}>
             <View style={styles.buttonContainer}>
               {/* <Pressable style={styles.button} onPress={toggleCameraFacing}>
